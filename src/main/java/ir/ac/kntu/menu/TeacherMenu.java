@@ -23,10 +23,11 @@ public class TeacherMenu implements Menu{
         //Hard_coded
         System.out.println("=================================================");
         System.out.println();
-        for (Class search : ClassesStorage.classOfUserTeacher(Main.loggedInUser)){
+        Main.getCustomer().setOwnedClass(ClassesStorage.classOfUserTeacher(Main.getCustomer()));
+        for (Class search : Main.getCustomer().getOwnedClass()){
             System.out.println(search);
         }
-        if (Main.loggedInUser.getOwnedClass().size() == 0){
+        if (Main.getCustomer().getOwnedClass().size() == 0){
             System.out.println("You do not own any class!");
         }
         System.out.println();
@@ -38,7 +39,7 @@ public class TeacherMenu implements Menu{
 
     @Override
     public Menu handleMenu() {
-        Main.loggedInUser.setOwnedClass(ClassesStorage.classOfUserTeacher(Main.loggedInUser));
+        Main.getCustomer().setOwnedClass(ClassesStorage.classOfUserTeacher(Main.getCustomer()));
         setTeacherClasses();
         String input = ScannerWrapper.getInstance().next();
         if (input.equals("Back")) {
@@ -48,9 +49,9 @@ public class TeacherMenu implements Menu{
             ClassesStorage.addClass(newClass);
             return TeacherMenu.getInstance();
         } else {
-            for (Class search : Main.loggedInUser.getOwnedClass()){
+            for (Class search : Main.getCustomer().getOwnedClass()){
                 if (search.getName().equals(input)){
-                    Main.loggedInUser.setManagingClass(search);
+                    Main.getCustomer().setManagingClass(search);
                     return ManegingClass.getInstance();
                 }
             }
@@ -61,8 +62,8 @@ public class TeacherMenu implements Menu{
     }
 
     private void setTeacherClasses(){
-        ArrayList<Class> ownedClass = ClassesStorage.classOfUserTeacher(Main.loggedInUser);
-        Main.loggedInUser.setOwnedClass(ownedClass);
+        ArrayList<Class> ownedClass = ClassesStorage.classOfUserTeacher(Main.getCustomer());
+        Main.getCustomer().setOwnedClass(ownedClass);
     }
 
     private Class makeNewClass(){
@@ -72,6 +73,6 @@ public class TeacherMenu implements Menu{
         String educationalInstitution = ScannerWrapper.getInstance().next();
         System.out.println("Enter academic year of new class : ");
         int academicYear = ScannerWrapper.getInstance().nextInt();
-        return new Class(name,educationalInstitution,Main.loggedInUser.getName(),academicYear);
+        return new Class(name,educationalInstitution,Main.getCustomer().getName(),academicYear);
     }
 }

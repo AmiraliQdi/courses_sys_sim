@@ -35,35 +35,35 @@ public class PracticeSetting implements Menu{
         String input = ScannerWrapper.getInstance().next();
         switch (input) {
             case "Set_status" :
-                System.out.println("Current status : " + Main.loggedInUser.getCurrentPractice().getStatus());
-                Main.loggedInUser.getCurrentPractice().setStatus(setStatus());
+                System.out.println("Current status : " + Main.getCustomer().getCurrentPractice().getStatus());
+                Main.getCustomer().getCurrentPractice().setStatus(setStatus());
                 return PracticeSetting.getInstance();
             case "Set_dead_line" :
-                System.out.println("Current dead line : " + Main.loggedInUser.getCurrentPractice().getEndingDate());
-                Main.loggedInUser.getCurrentPractice().setEndingDate(setDeadLine());
+                System.out.println("Current dead line : " + Main.getCustomer().getCurrentPractice().getEndingDate());
+                Main.getCustomer().getCurrentPractice().setEndingDate(setDeadLine());
                 return PracticeSetting.getInstance();
             case "Set_starting_date" :
-                System.out.println("Current dead line : " + Main.loggedInUser.getCurrentPractice().getStartingDate());
-                Main.loggedInUser.getCurrentPractice().setStartingDate(setStartingDate());
+                System.out.println("Current dead line : " + Main.getCustomer().getCurrentPractice().getStartingDate());
+                Main.getCustomer().getCurrentPractice().setStartingDate(setStartingDate());
                 return PracticeSetting.getInstance();
             case "Set_score_board_status" :
-                System.out.println("Current status is " + Main.loggedInUser.getCurrentPractice().getStatus());
+                System.out.println("Current status is " + Main.getCustomer().getCurrentPractice().getStatus());
                 setScoreBoardStatus();
                 return PracticeSetting.getInstance();
             case "Set_delay_sending_time" :
-                System.out.println("Current delay sending time is " + Main.loggedInUser.getCurrentPractice().getDelayedSendingTime());
-                Main.loggedInUser.getCurrentPractice().setDelayedSendingTime(setDelaySendingTime());
+                System.out.println("Current delay sending time is " + Main.getCustomer().getCurrentPractice().getDelayedSendingTime());
+                Main.getCustomer().getCurrentPractice().setDelayedSendingTime(setDelaySendingTime());
                 return PracticeSetting.getInstance();
             case "Set_delay_coefficient" :
-                System.out.println("Current delay coefficient is " + Main.loggedInUser.getCurrentPractice().getDelayCoefficient());
-                Main.loggedInUser.getCurrentPractice().setDelayCoefficient(setDelayCoefficient());
+                System.out.println("Current delay coefficient is " + Main.getCustomer().getCurrentPractice().getDelayCoefficient());
+                Main.getCustomer().getCurrentPractice().setDelayCoefficient(setDelayCoefficient());
                 return PracticeSetting.getInstance();
             case "Set_new_name" :
-                System.out.println("Current practice name is " + Main.loggedInUser.getCurrentPractice().getName());
-                Main.loggedInUser.getCurrentPractice().setName(setName());
+                System.out.println("Current practice name is " + Main.getCustomer().getCurrentPractice().getName());
+                Main.getCustomer().getCurrentPractice().setName(setName());
                 return PracticeSetting.getInstance();
             case "Delete" :
-                Main.loggedInUser.getManagingClass().removePractice(Main.loggedInUser.getCurrentPractice());
+                Main.getCustomer().getManagingClass().removePractice(Main.getCustomer().getCurrentPractice());
                 return ManegingClass.getInstance();
             case "Back" :
                 return ManegingClass.getInstance();

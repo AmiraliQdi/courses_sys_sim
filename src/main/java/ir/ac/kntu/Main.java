@@ -9,11 +9,13 @@ import ir.ac.kntu.storage.PrePrintedStrings;
 import ir.ac.kntu.storage.QuestionBank;
 import ir.ac.kntu.storage.UsersStorage;
 import ir.ac.kntu.util.Date;
-import ir.ac.kntu.util.userTypes.LoggedUser;
+import ir.ac.kntu.recourses.userTypes.Admin;
+import ir.ac.kntu.recourses.userTypes.Customer;
+import ir.ac.kntu.recourses.userTypes.Guest;
 
 public class Main {
 
-    public static LoggedUser loggedInUser;
+    private static User loggedInUser;
 
     public static void main(String[] args) {
 
@@ -30,8 +32,6 @@ public class Main {
 
         while (true){
 
-            loggedInUser.setLastMenu(menu);
-
             menu.printMenu();
 
             menu = menu.handleMenu();
@@ -42,11 +42,27 @@ public class Main {
 
     }
 
+    public static void setLoggedInUser(User setLoggedInUser) {
+        loggedInUser = setLoggedInUser;
+    }
+
+    public static Customer getCustomer(){
+        return (Customer) loggedInUser;
+    }
+
+    public static Admin getAdmin(){
+        return (Admin) loggedInUser;
+    }
+
+    public static Guest getGuest(){
+        return (Guest) loggedInUser;
+    }
+
     public static void addStartingInfo(){
-        User user1 = new User("amirali","amirali","amirali.ghaedi","123","0025319064","09303811221");
-        User user2 = new User("ahmad","ahmad","ahmad.rezai","123","0025319064","09303811221");
-        User user3 = new User("reza","reza","reza.sediqi","123","0025319064","09303811221");
-        User user4 = new User("sara","sara","sara.nasiri","123","0025319064","09303811221");
+        User user1 = new Customer("amirali","amirali","amirali.ghaedi","123","0025319064","09303811221");
+        User user2 = new Customer("ahmad","ahmad","ahmad.rezai","123","0025319064","09303811221");
+        User user3 = new Customer("reza","reza","reza.sediqi","123","0025319064","09303811221");
+        User user4 = new Customer("sara","sara","sara.nasiri","123","0025319064","09303811221");
 
         UsersStorage.addUser(user1);
         UsersStorage.addUser(user2);

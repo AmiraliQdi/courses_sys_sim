@@ -56,20 +56,20 @@ public class ManegingClass implements Menu{
         String input = ScannerWrapper.getInstance().next();
         switch (input) {
             case "Delete_this_class" :
-                ArrayList<Class> ownedClass = Main.loggedInUser.getOwnedClass();
-                ownedClass.remove(Main.loggedInUser.getManagingClass());
-                Main.loggedInUser.setOwnedClass(ownedClass);
-                ClassesStorage.removeClass(Main.loggedInUser.getManagingClass());
+                ArrayList<Class> ownedClass = Main.getCustomer().getOwnedClass();
+                ownedClass.remove(Main.getCustomer().getManagingClass());
+                Main.getCustomer().setOwnedClass(ownedClass);
+                ClassesStorage.removeClass(Main.getCustomer().getManagingClass());
                 return TeacherMenu.getInstance();
             case "Registrable":
                 System.out.println("1)ON");
                 System.out.println("2)OFF");
                 input = ScannerWrapper.getInstance().next();
                 if (input.equals("1")) {
-                    Main.loggedInUser.getManagingClass().setRegistrable(true);
+                    Main.getCustomer().getManagingClass().setRegistrable(true);
                     System.out.println("Class registrable set to true");
                 } else if (input.equals("2")) {
-                    Main.loggedInUser.getManagingClass().setRegistrable(false);
+                    Main.getCustomer().getManagingClass().setRegistrable(false);
                     System.out.println("Class registrable set to false");
                 } else {
                     System.out.println("Wrong input!");
@@ -89,10 +89,10 @@ public class ManegingClass implements Menu{
         System.out.println("2)PRIVATE");
         input = ScannerWrapper.getInstance().next();
         if (input.equals("1")) {
-            Main.loggedInUser.getManagingClass().setAccessibility(Accessibility.PUBLIC);
+            Main.getCustomer().getManagingClass().setAccessibility(Accessibility.PUBLIC);
             System.out.println("Set accessibility to public");
         } else if (input.equals("2")) {
-            Main.loggedInUser.getManagingClass().setAccessibility(Accessibility.PRIVATE);
+            Main.getCustomer().getManagingClass().setAccessibility(Accessibility.PRIVATE);
             System.out.println("Set accessibility to private");
         } else {
             System.out.println("Wrong input!");
@@ -104,8 +104,8 @@ public class ManegingClass implements Menu{
     private void tempPrint(){
         System.out.println("=================================================");
         System.out.println();
-        System.out.println("1)Registrable : " + Main.loggedInUser.getManagingClass().isRegistrable());
-        System.out.println("2)Privacy " + Main.loggedInUser.getManagingClass().getAccessibility());
+        System.out.println("1)Registrable : " + Main.getCustomer().getManagingClass().isRegistrable());
+        System.out.println("2)Privacy " + Main.getCustomer().getManagingClass().getAccessibility());
         System.out.println("3)Delete this class");
         System.out.println("Back");
         System.out.println();
@@ -130,8 +130,8 @@ public class ManegingClass implements Menu{
             if (selectedPractice == null){
                 return ManegingClass.getInstance();
             } else {
-                Main.loggedInUser.setCurrentPractice(selectedPractice);
-                Main.loggedInUser.setLastMenu(ManegingClass.getInstance());
+                Main.getCustomer().setCurrentPractice(selectedPractice);
+                Main.getCustomer().setLastMenu(ManegingClass.getInstance());
                 return EditingPractice.getInstance();
             }
         } else if (input.equals("Back")){
@@ -145,7 +145,7 @@ public class ManegingClass implements Menu{
     private Practice choosePractice(){
         System.out.println("Choose practice");
         String name = ScannerWrapper.getInstance().next();
-        for (Practice practice : Main.loggedInUser.getManagingClass().getPractices()){
+        for (Practice practice : Main.getCustomer().getManagingClass().getPractices()){
             if (practice.getName().equals(name)){
                 return practice;
             }
@@ -156,7 +156,7 @@ public class ManegingClass implements Menu{
 
     private void printPractices(){
         System.out.println();
-        for (Practice practice : Main.loggedInUser.getManagingClass().getPractices()){
+        for (Practice practice : Main.getCustomer().getManagingClass().getPractices()){
             System.out.println(practice);
         }
         System.out.println();
@@ -181,8 +181,8 @@ public class ManegingClass implements Menu{
         int delayTime = ScannerWrapper.getInstance().nextInt();
         Practice newPractice = new Practice(name,description,startingDate,endingDate,delay,delayTime);
         newPractice.setStatus(practiceStatus);
-        newPractice.setOwner(Main.loggedInUser.getManagingClass());
-        Main.loggedInUser.getManagingClass().makeNewPractice(newPractice);
+        newPractice.setOwner(Main.getCustomer().getManagingClass());
+        Main.getCustomer().getManagingClass().makeNewPractice(newPractice);
     }
 
     private static PracticeStatus setStatus(){
@@ -244,7 +244,7 @@ public class ManegingClass implements Menu{
         } else if (input.equals("Back")){
             return ManegingClass.getInstance();
         } else if (input.equals("Show_students")){
-            for (User user : Main.loggedInUser.getManagingClass().getRegisteredUsers()){
+            for (User user : Main.getCustomer().getManagingClass().getRegisteredUsers()){
                 System.out.println(user);
             }
             System.out.println();
@@ -266,8 +266,8 @@ public class ManegingClass implements Menu{
             search = UsersStorage.findByNationalNumber(input);
         }
         if (search!=null){
-            Main.loggedInUser.getManagingClass().register(search);
-            Main.loggedInUser.getManagingClass().addWorkSpace(search);
+            Main.getCustomer().getManagingClass().register(search);
+            Main.getCustomer().getManagingClass().addWorkSpace(search);
         }
     }
 
@@ -279,7 +279,7 @@ public class ManegingClass implements Menu{
             search = UsersStorage.findByNationalNumber(input);
         }
         if (search!= null){
-            Main.loggedInUser.getManagingClass().removeStudentFromClass(search);
+            Main.getCustomer().getManagingClass().removeStudentFromClass(search);
         }
     }
 }

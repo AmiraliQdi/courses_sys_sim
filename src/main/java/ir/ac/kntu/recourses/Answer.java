@@ -31,9 +31,13 @@ public class Answer {
 
     private double calcScore(){
         if (question.getAnswer().equals(answer)){
-            if (sentDate.isAfter(question.getPractice().getEndingDate())){
-                return 10*question.getPractice().getDelayCoefficient();
-            } else {
+            try {
+                if (sentDate.isAfter(question.getPractice().getEndingDate())){
+                    return 10*question.getPractice().getDelayCoefficient();
+                } else {
+                    return 10;
+                }
+            } catch (NullPointerException e) {
                 return 10;
             }
         } else {

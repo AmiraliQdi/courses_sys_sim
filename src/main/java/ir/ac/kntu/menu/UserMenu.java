@@ -34,7 +34,7 @@ public class UserMenu implements Menu{
         String input = ScannerWrapper.getInstance().next();
         switch (input) {
             case "My_info" :
-                System.out.println(Main.loggedInUser);
+                System.out.println(Main.getCustomer());
                 //MORE_CAN_BE_HERE(EDITING_MENU)!
                 System.out.println("press any key");
                 ScannerWrapper.getInstance().next();
@@ -42,11 +42,11 @@ public class UserMenu implements Menu{
             case "My_classes" :
                 return ClassMenu.getInstance();
             case "Owned_classes" :
-                ArrayList<Class> ownedClasses = ClassesStorage.classOfUserTeacher(Main.loggedInUser);
+                ArrayList<Class> ownedClasses = ClassesStorage.classOfUserTeacher(Main.getCustomer());
                 System.out.println(ownedClasses);
                 return TeacherMenu.getInstance();
             case "Question_bank" :
-                Main.loggedInUser.setLastMenu(QuestionAnswerMenu.getInstance());
+                Main.getCustomer().setLastMenu(QuestionAnswerMenu.getInstance());
                 return QuestionBankMenu.getInstance();
             case "Logout" :
                 return Logging.getInstance();

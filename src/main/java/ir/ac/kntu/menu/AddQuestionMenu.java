@@ -37,7 +37,7 @@ public class AddQuestionMenu implements Menu {
         switch (input) {
             case "Make_new_question":
                 Question question = makeNewQuestion();
-                Main.loggedInUser.getCurrentPractice().addNewQuestion(question);
+                Main.getCustomer().getCurrentPractice().addNewQuestion(question);
                 return AddQuestionMenu.getInstance();
             case "Add_from_bank":
                 System.out.println("Enter question name : ");
@@ -45,7 +45,7 @@ public class AddQuestionMenu implements Menu {
                 Question search = QuestionBank.findQuestionByName(input);
                 Question copy = new Question(search);
                 copy.setDateOfUpload(Date.CURRENT_DATE);
-                Main.loggedInUser.getCurrentPractice().addNewQuestion(copy);
+                Main.getCustomer().getCurrentPractice().addNewQuestion(copy);
                 System.out.println("Question + " + copy.getName() + " added!");
                 if (QuestionBank.findQuestionByName(input) == null) {
                     System.out.println("Wrong name");

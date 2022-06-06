@@ -164,6 +164,10 @@ public class Question {
         System.out.println(name + " date of upload : " + dateOfUpload + " dead line : " + practice.getEndingDate());
     }
 
+    public void smallPrint(int what){
+        System.out.println(name + " " + questionType + " " + questionDifficulty);
+    }
+
     public void smallPrint(String teacher){
         System.out.println(name + " date of upload : " + dateOfUpload + " answer : " + answer);
     }

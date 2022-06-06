@@ -22,7 +22,7 @@ public class StudentMenu implements Menu{
         //Hard_coded
         System.out.println("=================================================");
         System.out.println();
-        for (Class target : Main.loggedInUser.getJoinedClass()){
+        for (Class target : Main.getCustomer().getJoinedClass()){
             System.out.println(target);
         }
         System.out.println("Back");
@@ -41,7 +41,7 @@ public class StudentMenu implements Menu{
         if (targetClass == null){
             return StudentMenu.getInstance();
         }
-        Main.loggedInUser.setManagingClass(targetClass);
+        Main.getCustomer().setManagingClass(targetClass);
         System.out.println("Class practices : ");
         showPractices(targetClass);
         System.out.println("Select practice");
@@ -51,7 +51,7 @@ public class StudentMenu implements Menu{
             System.out.println("Wrong input");
             return StudentMenu.getInstance();
         }
-        Main.loggedInUser.setCurrentPractice(targetPractice);
+        Main.getCustomer().setCurrentPractice(targetPractice);
         return WorkSpaceMenu.getInstance();
     }
 
@@ -71,7 +71,7 @@ public class StudentMenu implements Menu{
     }
 
     private Class findClass(String name){
-        for (Class search : Main.loggedInUser.getJoinedClass()){
+        for (Class search : Main.getCustomer().getJoinedClass()){
             if (search.getName().equals(name)){
                 return search;
             }

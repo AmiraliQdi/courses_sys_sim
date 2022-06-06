@@ -33,11 +33,11 @@ public class ClassMenu implements Menu{
         String input = ScannerWrapper.getInstance().next();
         switch (input){
             case "See_my_classes" :
-                ArrayList<Class> myClasses = ClassesStorage.classOfUser(Main.loggedInUser);
-                Main.loggedInUser.setJoinedClass(myClasses);
+                ArrayList<Class> myClasses = ClassesStorage.classOfUser(Main.getCustomer());
+                Main.getCustomer().setJoinedClass(myClasses);
                 return StudentMenu.getInstance();
             case "Register_in_new_class" :
-                Main.loggedInUser.setLastMenu(ClassMenu.getInstance());
+                Main.getCustomer().setLastMenu(ClassMenu.getInstance());
                 return RegisteringClass.getInstance();
             case "Back" :
                 return UserMenu.getInstance();

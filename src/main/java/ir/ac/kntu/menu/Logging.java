@@ -2,12 +2,10 @@ package ir.ac.kntu.menu;
 
 import ir.ac.kntu.Main;
 import ir.ac.kntu.recourses.User;
-import ir.ac.kntu.storage.PrePrintedStrings;
 import ir.ac.kntu.storage.UsersStorage;
 import ir.ac.kntu.util.ScannerWrapper;
-import ir.ac.kntu.util.userTypes.LoggedUser;
-
-import java.util.ArrayList;
+import ir.ac.kntu.recourses.userTypes.Customer;
+import ir.ac.kntu.recourses.userTypes.Guest;
 
 public class Logging implements Menu{
 
@@ -25,6 +23,8 @@ public class Logging implements Menu{
     public void printMenu() {
         options.add("Login");
         options.add("SignUp");
+        options.add("Continue as guest");
+        options.add("Exit");
         printInteractMenu();
     }
 
@@ -39,14 +39,14 @@ public class Logging implements Menu{
                 String password = ScannerWrapper.getInstance().next();
                 User foundedUser = UsersStorage.findByName(username);
                 if (foundedUser.getPassword().equals(password)){
-                    Main.loggedInUser = (LoggedUser) foundedUser;
-                    return UserMenu.getInstance();
+                    Main.setLoggedInUser(foundedUser);
+                    return returnMenu(foundedUser);
+                    }
                 } else {
-                    System.out.println("Wrong Password!");
+                    System.out.println("Wrong user name!");
                     return Logging.getInstance();
                 }
-            }
-        } else if (input.equals("SignUp")){
+        } else if (input.equals("SignUp")) {
             System.out.println("Enter your username :");
             String username = ScannerWrapper.getInstance().next();
             System.out.println("Enter your National number : ");
@@ -59,14 +59,32 @@ public class Logging implements Menu{
             String name = ScannerWrapper.getInstance().next();
             System.out.println("Enter your password :");
             String password = ScannerWrapper.getInstance().next();
-            User newUser = new User(name,username,email,password,nationalNumber,phoneNumber);
+            User newUser = new Customer(name, username, email, password, nationalNumber, phoneNumber);
             UsersStorage.addUser(newUser);
-            Main.loggedInUser = (LoggedUser) newUser;
+            Main.setLoggedInUser(newUser);
             return UserMenu.getInstance();
+        } else if (input.equals("Continue_as_guest")) {
+            Main.setLoggedInUser(new Guest("guest","#","#","#","#","#"));
+        } else if (input.equals("Exit")){
+            System.exit(0);
         } else {
             System.out.println("Wrong input");
             return Logging.getInstance();
         }
         return Logging.getInstance();
+    }
+
+    private Menu returnMenu(User foundedUser){
+        switch (foundedUser.getUserType()){
+            case ADMIN -> {
+                return AdminMenu.getInstance();
+            }
+            case CUSTOMER -> {
+                return UserMenu.getInstance();
+            }
+            default -> {
+                return GuestMenu.getInstance();
+            }
+        }
     }
 }

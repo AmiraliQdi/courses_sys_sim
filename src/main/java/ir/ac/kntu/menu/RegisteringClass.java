@@ -34,7 +34,7 @@ public class RegisteringClass implements Menu{
                 if (ClassesStorage.findClassByName(input) == null){
                     System.out.println("There is not Class with that name");
                 } else {
-                    ClassesStorage.register(ClassesStorage.findClassByName(input), Main.loggedInUser);
+                    ClassesStorage.register(ClassesStorage.findClassByName(input), Main.getCustomer());
                 }
                 return RegisteringClass.getInstance();
             case "Class_educational_institution" :
@@ -43,11 +43,11 @@ public class RegisteringClass implements Menu{
                 if (ClassesStorage.findByEI(input) == null){
                     System.out.println("There is not Class with that name");
                 } else {
-                    ClassesStorage.register(ClassesStorage.findByEI(input), Main.loggedInUser);
+                    ClassesStorage.register(ClassesStorage.findByEI(input), Main.getCustomer());
                 }
                 return RegisteringClass.getInstance();
             case "Back" :
-                return Main.loggedInUser.getLastMenu();
+                return Main.getCustomer().getLastMenu();
             default:
                 System.out.println("Wrong input");
                 return RegisteringClass.getInstance();

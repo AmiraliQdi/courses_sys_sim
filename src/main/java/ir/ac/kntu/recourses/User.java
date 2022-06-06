@@ -1,11 +1,15 @@
 package ir.ac.kntu.recourses;
 
 import ir.ac.kntu.menu.Menu;
+import ir.ac.kntu.recourses.userTypes.UserType;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Objects;
 
-public class User {
+public abstract class User {
+
+    private UserType userType;
 
     private String name;
 
@@ -23,6 +27,10 @@ public class User {
 
     private String password;
 
+    private Menu lastMenu;
+
+
+
     public User(String name, String userName, String email, String password,String nationalNumber,String phoneNumber){
         this.name = name;
         this.userName = userName;
@@ -32,6 +40,14 @@ public class User {
         this.password = password;
         this.nationalNumber = nationalNumber;
         this.phoneNumber = phoneNumber;
+        this.userType = UserType.CUSTOMER;
+    }
+
+    public User(){
+        idCounter++;
+        this.id = idCounter;
+        this.userType = UserType.GUEST;
+        this.userName = "guest"+this.id;
     }
 
     public String getPassword() {
@@ -78,6 +94,21 @@ public class User {
         return email;
     }
 
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public Menu getLastMenu() {
+        return lastMenu;
+    }
+
+    public void setLastMenu(Menu lastMenu) {
+        this.lastMenu = lastMenu;
+    }
 
     @Override
     public String toString() {

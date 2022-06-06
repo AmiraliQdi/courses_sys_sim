@@ -37,14 +37,14 @@ public class EditingPractice implements Menu{
             case "See_last_answers" :
                 return seeLastAnswers();
             case "Practice_settings" :
-                Main.loggedInUser.setLastMenu(EditingPractice.getInstance());
+                Main.getCustomer().setLastMenu(EditingPractice.getInstance());
                 return PracticeSetting.getInstance();
             case "Marks" :
                 printMarks();
             case "Back":
                 return ManegingClass.getInstance();
             case "Add_question":
-                Main.loggedInUser.setLastMenu(EditingPractice.getInstance());
+                Main.getCustomer().setLastMenu(EditingPractice.getInstance());
                 return AddQuestionMenu.getInstance();
             case "See_questions":
                 printQuestions();
@@ -67,12 +67,12 @@ public class EditingPractice implements Menu{
             return EditingPractice.getInstance();
         }
         System.out.println("Choose which user");
-        for (User user : Main.loggedInUser.getManagingClass().getRegisteredUsers()) {
+        for (User user : Main.getCustomer().getManagingClass().getRegisteredUsers()) {
             System.out.println(user.getName());
         }
         User targetUser = UsersStorage.findByName(ScannerWrapper.getInstance().next());
         ArrayList<Question> targetArrayList = null;
-        targetArrayList = Main.loggedInUser.getCurrentPractice().getWorkMap().get(targetUser);
+        targetArrayList = Main.getCustomer().getCurrentPractice().getWorkMap().get(targetUser);
         for (Question question : targetArrayList) {
             if (question.equals(targetQuestion)) {
                 System.out.println(question.getWorkSpace().getLastAnswer());
@@ -118,17 +118,17 @@ public class EditingPractice implements Menu{
     }
 
     private void delete(Question targetQuestion){
-        ArrayList<Question> result = Main.loggedInUser.getCurrentPractice().getQuestions();
+        ArrayList<Question> result = Main.getCustomer().getCurrentPractice().getQuestions();
         result.remove(targetQuestion);
-        Main.loggedInUser.getCurrentPractice().setQuestions(result);
-        Main.loggedInUser.getCurrentPractice().makeWorkMap(Main.loggedInUser.getManagingClass());
+        Main.getCustomer().getCurrentPractice().setQuestions(result);
+        Main.getCustomer().getCurrentPractice().makeWorkMap(Main.getCustomer().getManagingClass());
     }
 
     private void addAnswer(Question targetQuestion,String input){
         System.out.println("Enter answer");
         input = ScannerWrapper.getInstance().next();
         targetQuestion.setAnswer(input);
-        Main.loggedInUser.getCurrentPractice().makeWorkMap(Main.loggedInUser.getManagingClass());
+        Main.getCustomer().getCurrentPractice().makeWorkMap(Main.getCustomer().getManagingClass());
     }
 
     private void editDescription(Question targetQuestion,String input){
@@ -136,14 +136,14 @@ public class EditingPractice implements Menu{
         input = ScannerWrapper.getInstance().next();
         targetQuestion.setDescription(input);
         System.out.println("updated!");
-        Main.loggedInUser.getCurrentPractice().makeWorkMap(Main.loggedInUser.getManagingClass());
+        Main.getCustomer().getCurrentPractice().makeWorkMap(Main.getCustomer().getManagingClass());
     }
 
     public static void printMarks(){
-        Main.loggedInUser.getCurrentPractice().makeMarks();
-        for (User user : Main.loggedInUser.getCurrentPractice().getUserMarks().keySet()){
-            System.out.println(user.getName() + " | " + Main.loggedInUser.getCurrentPractice().getUserMarks().get(user) + " | " +
-                    Main.loggedInUser.getCurrentPractice().getSumMarks().get(user));
+        Main.getCustomer().getCurrentPractice().makeMarks();
+        for (User user : Main.getCustomer().getCurrentPractice().getUserMarks().keySet()){
+            System.out.println(user.getName() + " | " + Main.getCustomer().getCurrentPractice().getUserMarks().get(user) + " | " +
+                    Main.getCustomer().getCurrentPractice().getSumMarks().get(user));
         }
     }
 
@@ -160,10 +160,10 @@ public class EditingPractice implements Menu{
     }
 
     private void printQuestions(){
-        if (Main.loggedInUser.getCurrentPractice().getQuestions().size() == 0){
+        if (Main.getCustomer().getCurrentPractice().getQuestions().size() == 0){
             System.out.println("This practice does not have any question");
         }
-        for (Question question : Main.loggedInUser.getCurrentPractice().getQuestions()){
+        for (Question question : Main.getCustomer().getCurrentPractice().getQuestions()){
             question.smallPrint("Teacher");
         }
     }
@@ -171,7 +171,7 @@ public class EditingPractice implements Menu{
     private Question chooseQuestion(){
         System.out.println("Choose question : ");
         String input = ScannerWrapper.getInstance().next();
-        for (Question question : Main.loggedInUser.getCurrentPractice().getQuestions()){
+        for (Question question : Main.getCustomer().getCurrentPractice().getQuestions()){
             if (question.getName().equals(input)){
                 return question;
             }

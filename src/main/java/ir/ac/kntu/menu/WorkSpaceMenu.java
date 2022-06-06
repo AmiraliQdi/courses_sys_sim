@@ -30,7 +30,7 @@ public class WorkSpaceMenu implements Menu {
         System.out.println("=================================================");
         System.out.println();
         System.out.println("Score board");
-        printQuestions(Main.loggedInUser.getCurrentPractice());
+        printQuestions(Main.getCustomer().getCurrentPractice());
         System.out.println("Back");
         System.out.println();
         System.out.println("=================================================");
@@ -41,7 +41,7 @@ public class WorkSpaceMenu implements Menu {
         String input = ScannerWrapper.getInstance().next();
         Question targetQuestion = findQuestion(input);
         if (input.equals("Score_board")){
-            if (Main.loggedInUser.getCurrentPractice().getScoreBoardStatus()){
+            if (Main.getCustomer().getCurrentPractice().getScoreBoardStatus()){
                 EditingPractice.printMarks();
                 ScannerWrapper.getInstance().next();
             } else {
@@ -57,13 +57,13 @@ public class WorkSpaceMenu implements Menu {
                 return WorkSpaceMenu.getInstance();
             }
         }
-        Main.loggedInUser.setCurrentWorkSpace(targetQuestion.getWorkSpace());
-        Main.loggedInUser.setLastMenu(WorkSpaceMenu.getInstance());
+        Main.getCustomer().setCurrentWorkSpace(targetQuestion.getWorkSpace());
+        Main.getCustomer().setLastMenu(WorkSpaceMenu.getInstance());
         return QuestionAnswerMenu.getInstance();
     }
 
     private Question findQuestion(String name){
-        for (Question question : Main.loggedInUser.getCurrentPractice().getWorkMap().get(Main.loggedInUser)){
+        for (Question question : Main.getCustomer().getCurrentPractice().getWorkMap().get(Main.getCustomer())){
             if (question.getName().equals(name)){
                 return question;
             }

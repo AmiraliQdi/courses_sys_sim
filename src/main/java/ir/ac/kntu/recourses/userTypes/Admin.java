@@ -1,6 +1,8 @@
-package ir.ac.kntu.util.userTypes;
+package ir.ac.kntu.recourses.userTypes;
 
-public class Admin extends LoggedUser {
+import ir.ac.kntu.recourses.User;
+
+public class Admin extends User {
 
     public Admin(String name, String userName, String email, String password, String nationalNumber, String phoneNumber) {
         super(name, userName, email, password, nationalNumber, phoneNumber);

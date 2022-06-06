@@ -20,8 +20,8 @@ public class QuestionBankMenu implements Menu{
 
     @Override
     public void printMenu() {
-        options.add("1)Find question");
-        options.add("2)See all questions");
+        options.add("Find question");
+        options.add("See all questions");
         options.add("Back");
         printInteractMenu();
     }
@@ -37,7 +37,7 @@ public class QuestionBankMenu implements Menu{
             return chooseQuestion(input);
         } else if (input.equals("See_all_questions")) {
             for (Question question : QuestionBank.getQuestions()){
-                question.smallPrint();
+                question.smallPrint(1);
                 System.out.println("=================================================");
             }
             System.out.println("Choose question : ");
@@ -52,10 +52,11 @@ public class QuestionBankMenu implements Menu{
     private Menu chooseQuestion(String name){
         if (QuestionBank.findQuestionByName(name) != null){
             Question question = new Question(Objects.requireNonNull(QuestionBank.findQuestionByName(name)));
-            Main.loggedInUser.setCurrentQuestionBank(question);
+            Main.getCustomer().setCurrentQuestionBank(question);
         } else {
             System.out.println("Wrong name");
+            return QuestionBankMenu.getInstance();
         }
-        return QuestionAnswerMenu.getInstance();
+        return QuestionAnswerMenuBank.getInstance();
     }
 }
