@@ -17,10 +17,10 @@ public class QuestionAnswerMenu implements Menu {
 
     @Override
     public void printMenu() {
-        options.add(Main.getCustomer().getCurrentWorkSpace().getQuestion().toString());
-        options.add("1)New answer");
-        options.add("2)See answers");
-        options.add("Back");
+        OPTIONS.add(Main.getCustomer().getCurrentWorkSpace().getQuestion().toString());
+        OPTIONS.add("1)New answer");
+        OPTIONS.add("2)See answers");
+        OPTIONS.add("Back");
         printInteractMenu();
     }
 

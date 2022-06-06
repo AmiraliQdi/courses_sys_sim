@@ -6,26 +6,26 @@ import java.util.ArrayList;
 
 public interface Menu {
 
-    ArrayList<String> options = new ArrayList<>();
+    ArrayList<String> OPTIONS = new ArrayList<>();
 
-    default void clearOptions(){
-        options.clear();
+    default void clearOPTIONS(){
+        OPTIONS.clear();
     }
 
     void printMenu();
 
     default void printInteractMenu(){
         System.out.println(PrePrintedStrings.START_MENU);
-        for (int i = 1;i<=options.size();i++){
-            System.out.println(i+")"+options.get(i-1));
+        for (int i = 1;i<=OPTIONS.size();i++){
+            System.out.println(i+")"+OPTIONS.get(i-1));
         }
         System.out.println(PrePrintedStrings.END_MENU);
-        clearOptions();
+        clearOPTIONS();
     }
 
     default void printInfoMenu(Object o){
         System.out.println(o.toString());
-        clearOptions();
+        clearOPTIONS();
     }
 
     Menu handleMenu();

@@ -21,10 +21,10 @@ public class Logging implements Menu{
 
     @Override
     public void printMenu() {
-        options.add("Login");
-        options.add("SignUp");
-        options.add("Continue as guest");
-        options.add("Exit");
+        OPTIONS.add("Login");
+        OPTIONS.add("SignUp");
+        OPTIONS.add("Continue as guest");
+        OPTIONS.add("Exit");
         printInteractMenu();
     }
 
@@ -41,11 +41,11 @@ public class Logging implements Menu{
                 if (foundedUser.getPassword().equals(password)){
                     Main.setLoggedInUser(foundedUser);
                     return returnMenu(foundedUser);
-                    }
-                } else {
-                    System.out.println("Wrong user name!");
-                    return Logging.getInstance();
                 }
+            } else {
+                System.out.println("Wrong user name!");
+                return Logging.getInstance();
+            }
         } else if (input.equals("SignUp")) {
             System.out.println("Enter your username :");
             String username = ScannerWrapper.getInstance().next();

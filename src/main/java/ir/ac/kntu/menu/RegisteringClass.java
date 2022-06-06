@@ -18,9 +18,9 @@ public class RegisteringClass implements Menu{
 
     @Override
     public void printMenu() {
-        options.add("1)Class name");
-        options.add("2)Class educational institution");
-        options.add("3)Class teacher name");
+        OPTIONS.add("1)Class name");
+        OPTIONS.add("2)Class educational institution");
+        OPTIONS.add("3)Class teacher name");
         printInteractMenu();
     }
 

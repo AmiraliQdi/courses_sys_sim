@@ -26,10 +26,10 @@ public class ManegingClass implements Menu{
 
     @Override
     public void printMenu() {
-        options.add("Students");
-        options.add("Practices");
-        options.add("Class settings");
-        options.add("Back");
+        OPTIONS.add("Students");
+        OPTIONS.add("Practices");
+        OPTIONS.add("Class settings");
+        OPTIONS.add("Back");
         printInteractMenu();
     }
 

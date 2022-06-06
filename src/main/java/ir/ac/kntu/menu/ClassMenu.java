@@ -21,9 +21,9 @@ public class ClassMenu implements Menu{
     @Override
     public void printMenu() {
 
-        options.add("See_my_classes");
-        options.add("Register_in_new_class");
-        options.add("Back");
+        OPTIONS.add("See_my_classes");
+        OPTIONS.add("Register_in_new_class");
+        OPTIONS.add("Back");
         printInteractMenu();
 
     }

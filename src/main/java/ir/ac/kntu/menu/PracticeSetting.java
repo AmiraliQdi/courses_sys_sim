@@ -18,15 +18,15 @@ public class PracticeSetting implements Menu{
 
     @Override
     public void printMenu() {
-        options.add("Set dead line");
-        options.add("Set starting date");
-        options.add("Set status");
-        options.add("Set score board status");
-        options.add("Set delay sending time");
-        options.add("Set delay coefficient");
-        options.add("Set new name");
-        options.add("Delete practice");
-        options.add("Back");
+        OPTIONS.add("Set dead line");
+        OPTIONS.add("Set starting date");
+        OPTIONS.add("Set status");
+        OPTIONS.add("Set score board status");
+        OPTIONS.add("Set delay sending time");
+        OPTIONS.add("Set delay coefficient");
+        OPTIONS.add("Set new name");
+        OPTIONS.add("Delete practice");
+        OPTIONS.add("Back");
         printInteractMenu();
     }
 

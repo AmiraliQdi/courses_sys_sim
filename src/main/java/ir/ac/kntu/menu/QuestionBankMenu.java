@@ -20,9 +20,9 @@ public class QuestionBankMenu implements Menu{
 
     @Override
     public void printMenu() {
-        options.add("Find question");
-        options.add("See all questions");
-        options.add("Back");
+        OPTIONS.add("Find question");
+        OPTIONS.add("See all questions");
+        OPTIONS.add("Back");
         printInteractMenu();
     }
 

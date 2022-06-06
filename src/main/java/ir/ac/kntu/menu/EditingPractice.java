@@ -20,12 +20,12 @@ public class EditingPractice implements Menu{
     public void printMenu() {
 
         System.out.println();
-        options.add("Add question");
-        options.add("See questions");
-        options.add("Practice settings");
-        options.add("See last answers");
-        options.add("Marks");
-        options.add("Back");
+        OPTIONS.add("Add question");
+        OPTIONS.add("See questions");
+        OPTIONS.add("Practice settings");
+        OPTIONS.add("See last answers");
+        OPTIONS.add("Marks");
+        OPTIONS.add("Back");
         printInteractMenu();
 
     }

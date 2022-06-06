@@ -21,11 +21,11 @@ public class UserMenu implements Menu{
 
     @Override
     public void printMenu() {
-        options.add("My info");
-        options.add("My classes");
-        options.add("Owned classes");
-        options.add("Question bank");
-        options.add("Logout");
+        OPTIONS.add("My info");
+        OPTIONS.add("My classes");
+        OPTIONS.add("Owned classes");
+        OPTIONS.add("Question bank");
+        OPTIONS.add("Logout");
         printInteractMenu();
     }
 

@@ -15,10 +15,10 @@ public class QuestionAnswerMenuBank implements Menu {
 
     @Override
     public void printMenu() {
-        options.add(Main.getCustomer().getCurrentQuestionBank().toString());
-        options.add("New answer");
-        options.add("See answers");
-        options.add("Back");
+        OPTIONS.add(Main.getCustomer().getCurrentQuestionBank().toString());
+        OPTIONS.add("New answer");
+        OPTIONS.add("See answers");
+        OPTIONS.add("Back");
         printInteractMenu();
     }
 

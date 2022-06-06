@@ -25,9 +25,9 @@ public class AddQuestionMenu implements Menu {
 
     @Override
     public void printMenu() {
-        options.add("Make_new_question");
-        options.add("Add_from_bank");
-        options.add("Back");
+        OPTIONS.add("Make_new_question");
+        OPTIONS.add("Add_from_bank");
+        OPTIONS.add("Back");
         printInteractMenu();
     }
 
