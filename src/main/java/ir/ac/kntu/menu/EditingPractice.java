@@ -77,7 +77,8 @@ public class EditingPractice implements Menu{
             if (question.equals(targetQuestion)) {
                 System.out.println(question.getWorkSpace().getLastAnswer());
                 System.out.println("Enter score : ");
-                question.getWorkSpace().setScore(ScannerWrapper.getInstance().nextDouble());
+                question.getWorkSpace().getLastAnswer().setScore(ScannerWrapper.getInstance().nextDouble());
+                System.out.println("score setted to : " + question.getWorkSpace().getScore());
                 return EditingPractice.getInstance();
             }
         }

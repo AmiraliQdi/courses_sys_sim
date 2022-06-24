@@ -78,6 +78,11 @@ public class ManegingClass implements Menu{
                 break;
             case "Privacy":
                 return privacy(input);
+            case "Set_new_teacher" :
+                System.out.println("Enter new teacher name from joined users");
+                System.out.println(Main.getCustomer().getManagingClass().getRegisteredUsers());
+                Main.getCustomer().getManagingClass().setTeacher(ScannerWrapper.getInstance().next());
+                return ManegingClass.getInstance();
             default:
                 return ManegingClass.getInstance();
         }
@@ -107,6 +112,7 @@ public class ManegingClass implements Menu{
         System.out.println("1)Registrable : " + Main.getCustomer().getManagingClass().isRegistrable());
         System.out.println("2)Privacy " + Main.getCustomer().getManagingClass().getAccessibility());
         System.out.println("3)Delete this class");
+        System.out.println("4)Set new teacher");
         System.out.println("Back");
         System.out.println();
         System.out.println("=================================================");

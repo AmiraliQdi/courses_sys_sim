@@ -1,5 +1,6 @@
 package ir.ac.kntu.recourses;
 
+import ir.ac.kntu.recourses.userTypes.Customer;
 import ir.ac.kntu.storage.UsersStorage;
 
 import java.util.ArrayList;
@@ -197,6 +198,21 @@ public class Class {
             }
         }
         System.out.println("Could not find this user in your class");
+    }
+
+    public void setTeacher(String userName){
+        for (User user : registeredUsers){
+            if (user.getUserName().equals(userName)){
+                Customer temp = (Customer) teacher;
+                temp.getOwnedClass().remove(this);
+                teacher = user;
+                teacherName = userName;
+                temp = (Customer) teacher;
+                ((Customer) teacher).getOwnedClass().add(this);
+                return;
+            }
+        }
+        System.out.println("Sorry but there is no user with that name in this class");
     }
 }
 

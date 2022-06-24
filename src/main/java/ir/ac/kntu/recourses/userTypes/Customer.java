@@ -9,9 +9,9 @@ import java.util.Map;
 
 public class Customer extends User {
 
-    private ArrayList<Class> joinedClass = null;
+    private ArrayList<Class> joinedClass = new ArrayList<>();
 
-    private ArrayList<Class> ownedClass = null;
+    private ArrayList<Class> ownedClass = new ArrayList<>();
 
     private WorkSpace currentWorkSpace = null;
 
@@ -21,12 +21,17 @@ public class Customer extends User {
 
     private Question currentQuestionBank;
 
-    private Map<Question,ArrayList<Answer>> bankAnswers = null;
+    private Map<Question,ArrayList<Answer>> bankAnswers = new HashMap<>();
+
+    private int userGlobalScore;
+
+    private int userRank;
 
     public Customer(String name, String userName, String email, String password, String nationalNumber, String phoneNumber) {
         super(name, userName, email, password, nationalNumber, phoneNumber);
         this.setUserType(UserType.CUSTOMER);
         bankAnswers = new HashMap<>();
+        userGlobalScore = 0;
     }
 
     public void setCurrentPractice(Practice currentPractice) {
@@ -96,6 +101,15 @@ public class Customer extends User {
             }
         }
         return null;
+    }
+
+    public void addScore(int score){
+        userGlobalScore += score;
+        userRank = userGlobalScore/50;
+    }
+
+    private int getUserGlobalScore(){
+        return userGlobalScore;
     }
 
 }
