@@ -228,10 +228,10 @@ public class ManegingClass implements Menu{
         int day1 = Integer.parseInt(numbers1[2]);
         Date start = new Date(year,month,day);
         Date end = new Date(year1,month1,day1);
-        ArrayList<Date> dates1 = new ArrayList<>();
-        dates1.add(start);
-        dates1.add(end);
-        return dates1;
+        ArrayList<Date> resultDates = new ArrayList<>();
+        resultDates.add(start);
+        resultDates.add(end);
+        return resultDates;
     }
 
     private Menu studentsMenu(){

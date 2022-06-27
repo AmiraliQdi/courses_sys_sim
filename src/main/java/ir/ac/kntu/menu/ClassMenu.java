@@ -40,7 +40,7 @@ public class ClassMenu implements Menu{
                 Main.getCustomer().setLastMenu(ClassMenu.getInstance());
                 return RegisteringClass.getInstance();
             case "Back" :
-                return UserMenu.getInstance();
+                return CustomerMenu.getInstance();
             default:
                 System.out.println("Wrong input");
                 return ClassMenu.getInstance();

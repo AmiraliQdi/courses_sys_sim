@@ -1,5 +1,7 @@
 package ir.ac.kntu.menu;
 
+import ir.ac.kntu.util.ScannerWrapper;
+
 public class AdminMenu implements Menu{
 
     private static AdminMenu instance = new AdminMenu();
@@ -10,11 +12,31 @@ public class AdminMenu implements Menu{
 
     @Override
     public void printMenu() {
-
+        OPTIONS.add("Tournaments");
+        OPTIONS.add("Classes");
+        OPTIONS.add("Question bank");
+        OPTIONS.add("Users");
+        OPTIONS.add("Back");
+        printInteractMenu();
     }
 
     @Override
     public Menu handleMenu() {
-        return null;
+        String input = ScannerWrapper.getInstance().next();
+        switch (input) {
+            case "Tournaments" :
+                return TournamentMenu.getInstance();
+            case "Classes" :
+                return ClassMenuAdmin.getInstance();
+            case "Question_bank" :
+                return QuestionBankMenuAdmin.getInstance();
+            case "User" :
+                return UsersSettingsMenu.getInstance();
+            case "Back" :
+                return Logging.getInstance();
+            default:
+                System.out.println("Wrong input!");
+                return AdminMenu.getInstance();
+        }
     }
 }

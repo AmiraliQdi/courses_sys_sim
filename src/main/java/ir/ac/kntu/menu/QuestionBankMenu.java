@@ -30,7 +30,7 @@ public class QuestionBankMenu implements Menu{
     public Menu handleMenu() {
         String input = ScannerWrapper.getInstance().next();
         if (input.equals("Back")){
-            return UserMenu.getInstance();
+            return CustomerMenu.getInstance();
         } else if (input.equals("Find_question")){
             System.out.println("Enter question name : ");
             input = ScannerWrapper.getInstance().next();

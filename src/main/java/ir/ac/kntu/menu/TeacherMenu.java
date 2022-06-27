@@ -43,7 +43,7 @@ public class TeacherMenu implements Menu{
         setTeacherClasses();
         String input = ScannerWrapper.getInstance().next();
         if (input.equals("Back")) {
-            return UserMenu.getInstance();
+            return CustomerMenu.getInstance();
         } else if (input.equals("Create_new_class")){
             Class newClass = makeNewClass();
             ClassesStorage.addClass(newClass);

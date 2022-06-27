@@ -1,5 +1,7 @@
 package ir.ac.kntu.util;
 
+import java.util.ArrayList;
+
 public class Date {
 	public enum Separator { DASH, COLON }
 
@@ -187,5 +189,29 @@ public class Date {
 		int day = Integer.parseInt(dates[2]);
 
 		return new Date(year,month,day);
+	}
+
+	public static ArrayList<Date> makeDates(String dates){
+		dates = dates.replaceAll(" ","");
+		String[] eachDate = dates.split("-");
+		if (eachDate[0] == null || eachDate[1] == null){
+			System.out.println("Wrong input");
+		}
+		String startDate = eachDate[0];
+		String endDate = eachDate[1];
+		String[] numbers = startDate.split("/");
+		int year = Integer.parseInt(numbers[0]);
+		int month = Integer.parseInt(numbers[1]);
+		int day = Integer.parseInt(numbers[2]);
+		String[] numbers1 = endDate.split("/");
+		int year1 = Integer.parseInt(numbers1[0]);
+		int month1 = Integer.parseInt(numbers1[1]);
+		int day1 = Integer.parseInt(numbers1[2]);
+		Date start = new Date(year,month,day);
+		Date end = new Date(year1,month1,day1);
+		ArrayList<Date> resultDates = new ArrayList<>();
+		resultDates.add(start);
+		resultDates.add(end);
+		return resultDates;
 	}
 }

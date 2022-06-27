@@ -74,4 +74,13 @@ public abstract class Tournament extends Class {
 
     public abstract void addScores();
 
+    public void longPrint(){
+        System.out.println(getName() + " | " + tournamentType + " | " + "Owner : " + getTeacherName());
+        System.out.println("Starting date : " + startingDate + " | " + "Ending date :" + endingDate);
+    }
+
+    public void smallPrint(){
+        System.out.println(getName() + " | " + tournamentType + " | " + "Owner : " + getTeacherName());
+    }
+
 }

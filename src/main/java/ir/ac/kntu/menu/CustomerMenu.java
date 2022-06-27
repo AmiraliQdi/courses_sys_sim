@@ -7,15 +7,15 @@ import ir.ac.kntu.util.ScannerWrapper;
 
 import java.util.ArrayList;
 
-public class UserMenu implements Menu{
+public class CustomerMenu implements Menu{
 
-    private static UserMenu instance = new UserMenu();
+    private static CustomerMenu instance = new CustomerMenu();
 
-    private UserMenu(){
+    private CustomerMenu(){
 
     }
 
-    public static UserMenu getInstance() {
+    public static CustomerMenu getInstance() {
         return instance;
     }
 
@@ -38,7 +38,7 @@ public class UserMenu implements Menu{
                 //MORE_CAN_BE_HERE(EDITING_MENU)!
                 System.out.println("press any key");
                 ScannerWrapper.getInstance().next();
-                return UserMenu.getInstance();
+                return CustomerMenu.getInstance();
             case "My_classes" :
                 return ClassMenu.getInstance();
             case "Owned_classes" :
@@ -52,7 +52,7 @@ public class UserMenu implements Menu{
                 return Logging.getInstance();
             default:
                 System.out.println("Wrong input");
-                return UserMenu.getInstance();
+                return CustomerMenu.getInstance();
         }
     }
 }

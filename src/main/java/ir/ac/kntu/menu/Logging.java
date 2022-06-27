@@ -62,7 +62,7 @@ public class Logging implements Menu{
             User newUser = new Customer(name, username, email, password, nationalNumber, phoneNumber);
             UsersStorage.addUser(newUser);
             Main.setLoggedInUser(newUser);
-            return UserMenu.getInstance();
+            return CustomerMenu.getInstance();
         } else if (input.equals("Continue_as_guest")) {
             Main.setLoggedInUser(new Guest("guest","#","#","#","#","#"));
         } else if (input.equals("Exit")){
@@ -80,7 +80,7 @@ public class Logging implements Menu{
                 return AdminMenu.getInstance();
             }
             case CUSTOMER -> {
-                return UserMenu.getInstance();
+                return CustomerMenu.getInstance();
             }
             default -> {
                 return GuestMenu.getInstance();
