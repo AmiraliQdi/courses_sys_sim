@@ -26,6 +26,7 @@ public class ClassMenuAdmin implements Menu{
         OPTIONS.add("See all classes");
         OPTIONS.add("Make new class");
         OPTIONS.add("Back");
+        printInteractMenu();
     }
 
     @Override
@@ -77,8 +78,8 @@ public class ClassMenuAdmin implements Menu{
     private void tempPrint(){
         System.out.println("=================================================");
         System.out.println();
-        System.out.println("1)Registrable : " + Main.getCustomer().getManagingClass().isRegistrable());
-        System.out.println("2)Privacy " + Main.getCustomer().getManagingClass().getAccessibility());
+        System.out.println("1)Registrable : " + Main.getAdmin().getManagingClass().isRegistrable());
+        System.out.println("2)Privacy " + Main.getAdmin().getManagingClass().getAccessibility());
         System.out.println("4)Set new teacher");
         System.out.println("Back");
         System.out.println();
@@ -108,7 +109,7 @@ public class ClassMenuAdmin implements Menu{
                 return privacy(input);
             case "Set_new_teacher" :
                 System.out.println("Enter new teacher name from joined users");
-                System.out.println(Main.getCustomer().getManagingClass().getRegisteredUsers());
+                System.out.println(Main.getAdmin().getManagingClass().getRegisteredUsers());
                 Main.getAdmin().getManagingClass().setTeacher(ScannerWrapper.getInstance().next());
                 return ClassMenuAdmin.getInstance();
             default:

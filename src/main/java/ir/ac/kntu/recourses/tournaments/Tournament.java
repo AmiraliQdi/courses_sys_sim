@@ -30,11 +30,12 @@ public abstract class Tournament extends Class {
 
     private ArrayList<User> topUsers;
 
+    private boolean hasStarted = false;
+
     public Tournament(String name, String adminUserName , int tournamentTime,TournamentType tournamentType,Date startingDate,Date endingDate) {
         super(name, "#", adminUserName ,0);
         this.tournamentTime = tournamentTime;
         this.tournamentType = tournamentType;
-        setMaxCustomers();
         this.startingDate = startingDate;
         this.endingDate = endingDate;
         makeMainPractice();
@@ -42,25 +43,31 @@ public abstract class Tournament extends Class {
         if (tournamentType.equals(TournamentType.NORMAL)){
             visibleForUsers.addAll(UsersStorage.getCustomers());
         }
+        TournamentStorage.addTournament(this);
     }
 
     private void makeMainPractice(){
-        Practice mainPractice = new Practice("main","main_practice",startingDate,endingDate,0,0);
-        mainPractice.setStatus(PracticeStatus.ACCESSIBLE);
+        Practice newPractice = new Practice("main","main_practice",startingDate,endingDate,0,0);
+        newPractice.setStatus(PracticeStatus.ACCESSIBLE);
+        newPractice.setOwner(this);
+        mainPractice = newPractice;
     }
 
     public void startTournament(){
-        if (Date.CURRENT_DATE.isAfter(startingDate)){
-            mainPractice.makeWorkMap(this);
-        }
+        mainPractice.makeWorkMap(this);
+        hasStarted = true;
     }
 
-    private void setMaxCustomers(){
-        switch (tournamentType) {
-            case NORMAL -> maxCustomers = 50;
-            case PRIVATE -> maxCustomers = 20;
-            case SPECIAL -> maxCustomers = 100;
-        }
+    public boolean isHasStarted() {
+        return hasStarted;
+    }
+
+    public void setMaxCustomers(int maxCustomers) {
+        this.maxCustomers = maxCustomers;
+    }
+
+    public int getMaxCustomers() {
+        return maxCustomers;
     }
 
     public void closeTournament(){
@@ -70,6 +77,7 @@ public abstract class Tournament extends Class {
         topUsers = new ArrayList<>(sortedSumMarks.keySet());
         addScores();
         TournamentStorage.removeTournament(this);
+        hasStarted = false;
     }
 
     public ArrayList<User> getTopUsers() {
@@ -146,5 +154,9 @@ public abstract class Tournament extends Class {
 
     public void smallPrintTournament(){
         System.out.println(getName() + "-" + tournamentType + "-" + startingDate + "/" + endingDate);
+    }
+
+    public String toString(){
+        return getName() + "-" + tournamentType + "-" + startingDate + "/" + endingDate;
     }
 }

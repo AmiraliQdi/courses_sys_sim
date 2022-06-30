@@ -10,10 +10,11 @@ public class NormalTournament extends Tournament{
 
     private static final int REWARD_SCORE = 20;
 
-    private static final int REWARDS_COUNT = 5;
+    private static int REWARDS_COUNT = 5;
 
     public NormalTournament(String name, String adminUserName, int tournamentTime, TournamentType tournamentType, Date startingDate, Date endingDate) {
         super(name, adminUserName, tournamentTime, tournamentType,startingDate,endingDate);
+        setMaxCustomers(50);
     }
 
     @Override
@@ -21,6 +22,9 @@ public class NormalTournament extends Tournament{
         ArrayList<Customer> customers = new ArrayList<>();
         for (User user : getTopUsers()){
             customers.add((Customer) user);
+        }
+        if (getTopUsers().size() <REWARDS_COUNT){
+            REWARDS_COUNT = getTopUsers().size();
         }
         for (int i = 0 ;i < REWARDS_COUNT;i++){
             customers.get(i).addScore(REWARD_SCORE);

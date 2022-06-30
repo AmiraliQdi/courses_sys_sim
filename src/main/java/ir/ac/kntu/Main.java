@@ -4,6 +4,8 @@ import ir.ac.kntu.menu.Menu;
 import ir.ac.kntu.menu.StartingMenu;
 import ir.ac.kntu.recourses.*;
 import ir.ac.kntu.recourses.Class;
+import ir.ac.kntu.recourses.tournaments.NormalTournament;
+import ir.ac.kntu.recourses.tournaments.TournamentType;
 import ir.ac.kntu.storage.ClassesStorage;
 import ir.ac.kntu.storage.PrePrintedStrings;
 import ir.ac.kntu.storage.QuestionBank;
@@ -70,7 +72,7 @@ public class Main {
         UsersStorage.addUser(user4);
 
         Class class1 = new Class("class1","kntu","amirali",1400);
-        Class class2 = new Class("class2","kntu","amirali",1404);
+        Class class2 = new Class("class2","kntu","ahmad",1404);
 
         ClassesStorage.addClass(class1);
         ClassesStorage.addClass(class2);
@@ -98,6 +100,12 @@ public class Main {
 
         class1.register(user2);
         class1.register(user3);
+
+        NormalTournament normalTournament1 = new NormalTournament("mosabeqe1","amirali",5,
+                TournamentType.NORMAL,date1,date2);
+
+        normalTournament1.getMainPractice().addNewQuestion(question1);
+        normalTournament1.getMainPractice().addNewQuestion(question2);
 
     }
 }

@@ -126,8 +126,9 @@ public class Practice {
     }
 
     public void makeMarks(){
-        ArrayList<Double> marks = new ArrayList<>();
+        ArrayList<Double> marks;
         for (User user : owner.getRegisteredUsers()){
+            marks = new ArrayList<>();
             double sumMark = 0;
             for (Question question : workMap.get(user)){
                 sumMark += question.getWorkSpace().getScore();

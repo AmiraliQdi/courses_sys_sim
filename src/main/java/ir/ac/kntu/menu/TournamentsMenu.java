@@ -58,19 +58,30 @@ public class TournamentsMenu implements Menu{
         String input = ScannerWrapper.getInstance().next();
         for (NormalTournament normalTournament : normalTournaments){
             if (normalTournament.getName().equals(input)){
-                normalTournament.register(Main.getCustomer());
-                Main.getCustomer().addToJoinedTournaments(normalTournament);
-                System.out.println("Joined " + normalTournament.getName() + "tournament!");
+                if (normalTournament.isHasStarted()) {
+                    System.out.println("Sorry but tournament has already started!");
+                } else {
+                    normalTournament.register(Main.getCustomer());
+                    Main.getCustomer().addToJoinedTournaments(normalTournament);
+                    System.out.println("Joined " + normalTournament.getName() + "tournament!");
+                }
                 return TournamentsMenu.getInstance();
             }
         }
         for (PrivateTournament privateTournament : privateTournaments){
             if (privateTournament.getName().equals(input)){
-                privateTournament.register(Main.getCustomer());
-                Main.getCustomer().addToJoinedTournaments(privateTournament);
-                System.out.println("Joined " + privateTournament.getName() + "tournament");
+                if (privateTournament.isHasStarted()){
+                    System.out.println("Sorry but tournament has already started!");
+                } else {
+                    privateTournament.register(Main.getCustomer());
+                    Main.getCustomer().addToJoinedTournaments(privateTournament);
+                    System.out.println("Joined " + privateTournament.getName() + "tournament");
+                }
                 return TournamentsMenu.getInstance();
             }
+        }
+        if (input.equals("Back")){
+            return TournamentsMenu.getInstance();
         }
         System.out.println("Wrong tournament name!");
         return TournamentsMenu.getInstance();
@@ -85,9 +96,14 @@ public class TournamentsMenu implements Menu{
         String input = ScannerWrapper.getInstance().next();
         for (Tournament tournament : Main.getCustomer().getJoinedTournaments()){
             if (tournament.getName().equals(input)){
-                Main.getCustomer().setCurrentTournament(tournament);
-                Main.getCustomer().setCurrentPractice(tournament.getMainPractice());
-                return WorkSpaceMenu.getInstance();
+                if (tournament.isHasStarted()){
+                    Main.getCustomer().setCurrentTournament(tournament);
+                    Main.getCustomer().setCurrentPractice(tournament.getMainPractice());
+                    return WorkSpaceMenu.getInstance();
+                } else {
+                    System.out.println("Tournaments has not started yet!");
+                    return TournamentsMenu.getInstance();
+                }
             }
         }
         System.out.println("Wrong name!");

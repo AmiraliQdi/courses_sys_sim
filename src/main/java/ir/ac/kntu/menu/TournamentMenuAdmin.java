@@ -25,6 +25,7 @@ public class TournamentMenuAdmin implements Menu{
         OPTIONS.add("See all tournaments");
         OPTIONS.add("Create new tournament");
         OPTIONS.add("Back");
+        printInteractMenu();
     }
 
     @Override
@@ -53,7 +54,6 @@ public class TournamentMenuAdmin implements Menu{
                 }
             case "Create_new_tournament" :
                 Tournament newTournament = makeNewTournament();
-                TournamentStorage.addTournament(newTournament);
                 Main.getAdmin().setManagingTournament(newTournament);
                 return ManagingTournament.getInstance();
             case "Back" :
@@ -71,7 +71,7 @@ public class TournamentMenuAdmin implements Menu{
         ArrayList<Date> dates = Date.makeDates(ScannerWrapper.getInstance().next());
         System.out.println("Enter tournament duration (hours) : ");
         int duration = ScannerWrapper.getInstance().nextInt();
-        System.out.println("Enter tournament type : ");
+        System.out.println("Enter tournament type : (NORMAL,SPECIAL,PRIVATE)");
         TournamentType tournamentType;
         try {
             tournamentType = getType(ScannerWrapper.getInstance().next());
@@ -83,7 +83,31 @@ public class TournamentMenuAdmin implements Menu{
         if (tournamentType == null){
             throw new NullPointerException();
         }
-        return makeNew(name,dates,tournamentType,duration);
+        switch (tournamentType) {
+            case NORMAL -> {
+                return normalTournament(name,dates,duration);
+            }
+            case SPECIAL -> {
+                return specialTournament(name,dates,duration);
+            }
+            case PRIVATE -> {
+                return privateTournament(name,dates,duration);
+            }
+        }
+        System.out.println("WTF");
+        return null;
+    }
+
+    private NormalTournament normalTournament(String name,ArrayList<Date> dates,int duration){
+        return new NormalTournament(name,Main.getAdmin().getUserName(),duration,TournamentType.NORMAL,dates.get(0),dates.get(1));
+    }
+
+    private PrivateTournament privateTournament(String name,ArrayList<Date> dates,int duration){
+        return new PrivateTournament(name,Main.getAdmin().getUserName(),duration,TournamentType.PRIVATE,dates.get(0),dates.get(1));
+    }
+
+    private SpecialTournament specialTournament(String name,ArrayList<Date> dates,int duration){
+        return new SpecialTournament(name,Main.getAdmin().getUserName(),duration,TournamentType.SPECIAL,dates.get(0),dates.get(1));
     }
 
     private Tournament makeNew(String name,ArrayList<Date> dates,TournamentType tournamentType,int duration) {

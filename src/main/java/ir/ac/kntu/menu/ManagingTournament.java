@@ -37,6 +37,7 @@ public class ManagingTournament implements Menu{
         OPTIONS.add("End tournament");
         OPTIONS.add("Questions");
         OPTIONS.add("Students");
+        OPTIONS.add("Top makrs");
         OPTIONS.add("Delete");
         OPTIONS.add("Back");
         printInteractMenu();
@@ -47,6 +48,11 @@ public class ManagingTournament implements Menu{
         Tournament tournament = Main.getAdmin().getManagingTournament();
         String input = ScannerWrapper.getInstance().next();
         switch (input) {
+            case "Top_marks":
+                System.out.println();
+                for (User user : tournament.getTopUsers()){
+                    System.out.println(user);
+                }
             case "Delete " :
                 TournamentStorage.removeTournament(Main.getAdmin().getManagingTournament());
             case "Change_name" :
@@ -59,8 +65,12 @@ public class ManagingTournament implements Menu{
                 changeDuration(tournament);
             case "Start_tournament" :
                 tournament.startTournament();
+                System.out.println("Tournament has started");
+                return ManagingTournament.getInstance();
             case "End_tournament" :
                 tournament.closeTournament();
+                System.out.println("Tournament closed!");
+                return ManagingTournament.getInstance();
             case "Questions" :
                 Main.getAdmin().setCurrentPractice(tournament.getMainPractice());
                 return TournamentMainPracticeEdit.getInstance();

@@ -203,12 +203,8 @@ public class Class {
     public void setTeacher(String userName){
         for (User user : registeredUsers){
             if (user.getUserName().equals(userName)){
-                Customer temp = (Customer) teacher;
-                temp.getOwnedClass().remove(this);
                 teacher = user;
                 teacherName = userName;
-                temp = (Customer) teacher;
-                ((Customer) teacher).getOwnedClass().add(this);
                 return;
             }
         }
