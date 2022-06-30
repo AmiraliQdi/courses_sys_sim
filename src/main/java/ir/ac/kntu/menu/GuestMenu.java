@@ -20,6 +20,7 @@ public class GuestMenu implements Menu{
         OPTIONS.add("Question bank");
         OPTIONS.add("Closed tournaments");
         OPTIONS.add("Back");
+        printInteractMenu();
     }
 
     @Override
