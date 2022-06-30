@@ -8,7 +8,7 @@ import ir.ac.kntu.util.ScannerWrapper;
 
 public class QuestionBankMenuAdmin implements Menu{
 
-    private static final QuestionBankMenuAdmin instance = new QuestionBankMenuAdmin();
+    private static QuestionBankMenuAdmin instance = new QuestionBankMenuAdmin();
 
     private QuestionBankMenuAdmin(){
 

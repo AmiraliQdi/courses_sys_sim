@@ -16,7 +16,7 @@ import java.util.Optional;
 
 public class ManagingTournament implements Menu{
 
-    private static final ManagingTournament instance = new ManagingTournament();
+    private static ManagingTournament instance = new ManagingTournament();
 
     private ManagingTournament(){
 
@@ -137,8 +137,9 @@ public class ManagingTournament implements Menu{
                 User user2 = UsersStorage.findByEmail(studentEmail);
                 tournament.addToVisible((Customer) user2);
                 return ManagingTournament.getInstance();
+            default:
+                return ManagingTournament.getInstance();
         }
-        return ManagingTournament.getInstance();
     }
 
     private Menu changeName(Tournament tournament){

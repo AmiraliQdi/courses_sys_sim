@@ -14,8 +14,8 @@ public class TournamentGuest implements Menu{
     }
 
     private TournamentGuest(){
-
     }
+
     private void printQuestions(Practice practice){
         for (Question question : practice.getQuestions()){
             System.out.println();

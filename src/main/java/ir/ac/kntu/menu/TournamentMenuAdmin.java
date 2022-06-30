@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class TournamentMenuAdmin implements Menu{
 
-    private static final TournamentMenuAdmin instance = new TournamentMenuAdmin();
+    private static TournamentMenuAdmin instance = new TournamentMenuAdmin();
 
     private TournamentMenuAdmin(){
 
@@ -93,9 +93,10 @@ public class TournamentMenuAdmin implements Menu{
             case PRIVATE -> {
                 return privateTournament(name,dates,duration);
             }
+            default -> {
+                return null;
+            }
         }
-        System.out.println("WTF");
-        return null;
     }
 
     private NormalTournament normalTournament(String name,ArrayList<Date> dates,int duration){
@@ -115,6 +116,9 @@ public class TournamentMenuAdmin implements Menu{
             case PRIVATE -> new PrivateTournament(name,Main.getAdmin().getUserName(),duration,TournamentType.PRIVATE,dates.get(0),dates.get(1));
             case SPECIAL -> new SpecialTournament(name,Main.getAdmin().getUserName(),duration,TournamentType.SPECIAL,dates.get(0),dates.get(1));
             case NORMAL -> new NormalTournament(name,Main.getAdmin().getUserName(),duration,TournamentType.NORMAL,dates.get(0),dates.get(1));
+            default -> {
+                return null;
+            }
         }
         return null;
     }

@@ -32,28 +32,28 @@ public abstract class Tournament extends Class {
 
     private boolean hasStarted = false;
 
-    public Tournament(String name, String adminUserName , int tournamentTime,TournamentType tournamentType,Date startingDate,Date endingDate) {
-        super(name, "#", adminUserName ,0);
+    public Tournament(String name, String adminUserName, int tournamentTime, TournamentType tournamentType, Date startingDate, Date endingDate) {
+        super(name, "#", adminUserName, 0);
         this.tournamentTime = tournamentTime;
         this.tournamentType = tournamentType;
         this.startingDate = startingDate;
         this.endingDate = endingDate;
         makeMainPractice();
         visibleForUsers = new ArrayList<>();
-        if (tournamentType.equals(TournamentType.NORMAL)){
+        if (tournamentType.equals(TournamentType.NORMAL)) {
             visibleForUsers.addAll(UsersStorage.getCustomers());
         }
         TournamentStorage.addTournament(this);
     }
 
-    private void makeMainPractice(){
-        Practice newPractice = new Practice("main","main_practice",startingDate,endingDate,0,0);
+    private void makeMainPractice() {
+        Practice newPractice = new Practice("main", "main_practice", startingDate, endingDate, 0, 0);
         newPractice.setStatus(PracticeStatus.ACCESSIBLE);
         newPractice.setOwner(this);
         mainPractice = newPractice;
     }
 
-    public void startTournament(){
+    public void startTournament() {
         mainPractice.makeWorkMap(this);
         hasStarted = true;
     }
@@ -70,10 +70,10 @@ public abstract class Tournament extends Class {
         return maxCustomers;
     }
 
-    public void closeTournament(){
-        Map<User,Double> sortedSumMarks = mainPractice.getSumMarks().entrySet()
-                .stream().sorted(Map.Entry.comparingByValue()).collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue,
-                        (oldV,newV) -> oldV, LinkedHashMap::new));
+    public void closeTournament() {
+        Map<User, Double> sortedSumMarks = mainPractice.getSumMarks().entrySet()
+                .stream().sorted(Map.Entry.comparingByValue()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (oldV, newV) -> oldV, LinkedHashMap::new));
         topUsers = new ArrayList<>(sortedSumMarks.keySet());
         addScores();
         TournamentStorage.removeTournament(this);
@@ -90,12 +90,12 @@ public abstract class Tournament extends Class {
 
     public abstract void addScores();
 
-    public void longPrint(){
+    public void longPrint() {
         System.out.println(getName() + " | " + tournamentType + " | " + "Owner : " + getTeacherName());
         System.out.println("Starting date : " + startingDate + " | " + "Ending date :" + endingDate);
     }
 
-    public void smallPrint(){
+    public void smallPrint() {
         System.out.println(getName() + " | " + tournamentType + " | " + "Owner : " + getTeacherName());
     }
 
@@ -125,11 +125,11 @@ public abstract class Tournament extends Class {
 
     public void setTournamentType(String newType) {
         switch (newType) {
-            case "SPECIAL" :
+            case "SPECIAL":
                 tournamentType = TournamentType.SPECIAL;
-            case "NORMAL" :
+            case "NORMAL":
                 tournamentType = TournamentType.NORMAL;
-            case "PRIVATE" :
+            case "PRIVATE":
                 tournamentType = TournamentType.PRIVATE;
             default:
                 System.out.println("Wrong type!");
@@ -144,7 +144,7 @@ public abstract class Tournament extends Class {
         this.mainPractice = mainPractice;
     }
 
-    public void addToVisible(Customer user){
+    public void addToVisible(Customer user) {
         visibleForUsers.add(user);
     }
 
@@ -152,11 +152,11 @@ public abstract class Tournament extends Class {
         return visibleForUsers;
     }
 
-    public void smallPrintTournament(){
+    public void smallPrintTournament() {
         System.out.println(getName() + "-" + tournamentType + "-" + startingDate + "/" + endingDate);
     }
 
-    public String toString(){
+    public String toString() {
         return getName() + "-" + tournamentType + "-" + startingDate + "/" + endingDate;
     }
 }

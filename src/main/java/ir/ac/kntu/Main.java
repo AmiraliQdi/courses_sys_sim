@@ -65,29 +65,22 @@ public class Main {
         User user2 = new Customer("ahmad","ahmad","ahmad.rezai","123","0025319064","09303811221");
         User user3 = new Customer("reza","reza","reza.sediqi","123","0025319064","09303811221");
         User user4 = new Customer("sara","sara","sara.nasiri","123","0025319064","09303811221");
-
         UsersStorage.addUser(user1);
         UsersStorage.addUser(user2);
         UsersStorage.addUser(user3);
         UsersStorage.addUser(user4);
-
         Class class1 = new Class("class1","kntu","amirali",1400);
         Class class2 = new Class("class2","kntu","ahmad",1404);
-
         ClassesStorage.addClass(class1);
         ClassesStorage.addClass(class2);
-
         Question question1 = new Question("soal1","soal_aval", QuestionDifficulty.HARD, QuestionType.TEST,"gozine1");
         Question question2 = new Question("soal2","soal_dovom", QuestionDifficulty.EASY, QuestionType.SHORT_ANSWER,"gozine2");
         Question question3 = new Question("soal3","soal_sevom", QuestionDifficulty.INSANE, QuestionType.FILL_THE_BLANK,"gozine3");
-
         QuestionBank.addQuestionToBank(question1);
         QuestionBank.addQuestionToBank(question2);
         QuestionBank.addQuestionToBank(question3);
-
         Date date1 = new Date(1401,2,5);
         Date date2 = new Date(1401,3,5);
-
         Practice practice1 = new Practice("practice1","newPractice1",date1,date2,0.5,2);
         Practice practice2 = new Practice("practice2","newPractice2",date1,date2,0.5,2);
 

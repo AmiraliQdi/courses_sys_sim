@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class ClassMenuAdmin implements Menu{
 
-    private static final ClassMenuAdmin instance = new ClassMenuAdmin();
+    private static  ClassMenuAdmin instance = new ClassMenuAdmin();
 
     public static ClassMenuAdmin getInstance() {
         return instance;

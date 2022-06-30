@@ -8,7 +8,7 @@ import ir.ac.kntu.util.ScannerWrapper;
 
 public class UsersSettingsMenu implements Menu{
 
-    private static final UsersSettingsMenu instance = new UsersSettingsMenu();
+    private static UsersSettingsMenu instance = new UsersSettingsMenu();
 
     private UsersSettingsMenu() {
 
