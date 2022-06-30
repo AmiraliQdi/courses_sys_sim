@@ -65,6 +65,7 @@ public class Logging implements Menu{
             return CustomerMenu.getInstance();
         } else if (input.equals("Continue_as_guest")) {
             Main.setLoggedInUser(new Guest("guest","#","#","#","#","#"));
+            return GuestMenu.getInstance();
         } else if (input.equals("Exit")){
             System.exit(0);
         } else {
