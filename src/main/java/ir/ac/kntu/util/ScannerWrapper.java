@@ -31,4 +31,12 @@ public class ScannerWrapper {
 	public void close() {
 		scanner.close();
 	}
+
+	public boolean hasNext(){
+		if (scanner.hasNext()){
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

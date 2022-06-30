@@ -214,6 +214,10 @@ public class Class {
         }
         System.out.println("Sorry but there is no user with that name in this class");
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
 
 

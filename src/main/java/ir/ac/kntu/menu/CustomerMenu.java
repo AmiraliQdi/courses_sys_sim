@@ -24,6 +24,7 @@ public class CustomerMenu implements Menu{
         OPTIONS.add("My info");
         OPTIONS.add("My classes");
         OPTIONS.add("Owned classes");
+        OPTIONS.add("Tournaments");
         OPTIONS.add("Question bank");
         OPTIONS.add("Logout");
         printInteractMenu();
@@ -33,6 +34,8 @@ public class CustomerMenu implements Menu{
     public Menu handleMenu() {
         String input = ScannerWrapper.getInstance().next();
         switch (input) {
+            case "Tournaments" :
+                return TournamentsMenu.getInstance();
             case "My_info" :
                 System.out.println(Main.getCustomer());
                 //MORE_CAN_BE_HERE(EDITING_MENU)!

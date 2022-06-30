@@ -1,6 +1,8 @@
 package ir.ac.kntu.storage;
 
 import ir.ac.kntu.recourses.User;
+import ir.ac.kntu.recourses.userTypes.Customer;
+import ir.ac.kntu.recourses.userTypes.UserType;
 
 import java.util.ArrayList;
 
@@ -60,5 +62,15 @@ public class UsersStorage {
         } else {
             System.out.println("This user is already registered");
         }
+    }
+
+    public static ArrayList<Customer> getCustomers(){
+        ArrayList<Customer> result = new ArrayList<>();
+        for (User user : users) {
+            if (user.getUserType().equals(UserType.CUSTOMER)){
+                result.add((Customer) user);
+            }
+        }
+        return result;
     }
 }

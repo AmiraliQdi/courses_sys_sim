@@ -57,6 +57,10 @@ public class ClassesStorage {
         return true;
     }
 
+    public static ArrayList<Class> getClasses() {
+        return classes;
+    }
+
     public static void removeClass(Class targetClass){
         for (Class search : classes){
             if (targetClass.equals(search)){

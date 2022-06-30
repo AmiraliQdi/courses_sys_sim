@@ -1,7 +1,9 @@
 package ir.ac.kntu.recourses.userTypes;
 
+import ir.ac.kntu.menu.TournamentsMenu;
 import ir.ac.kntu.recourses.*;
 import ir.ac.kntu.recourses.Class;
+import ir.ac.kntu.recourses.tournaments.Tournament;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +12,8 @@ import java.util.Map;
 public class Customer extends User {
 
     private ArrayList<Class> joinedClass = new ArrayList<>();
+
+    private ArrayList<Tournament> joinedTournaments = new ArrayList<>();
 
     private ArrayList<Class> ownedClass = new ArrayList<>();
 
@@ -26,6 +30,8 @@ public class Customer extends User {
     private int userGlobalScore;
 
     private int userRank;
+
+    private Tournament currentTournament;
 
     public Customer(String name, String userName, String email, String password, String nationalNumber, String phoneNumber) {
         super(name, userName, email, password, nationalNumber, phoneNumber);
@@ -112,4 +118,19 @@ public class Customer extends User {
         return userGlobalScore;
     }
 
+    public Tournament getCurrentTournament() {
+        return currentTournament;
+    }
+
+    public void setCurrentTournament(Tournament currentTournament) {
+        this.currentTournament = currentTournament;
+    }
+
+    public void addToJoinedTournaments(Tournament tournament){
+        joinedTournaments.add(tournament);
+    }
+
+    public ArrayList<Tournament> getJoinedTournaments() {
+        return joinedTournaments;
+    }
 }

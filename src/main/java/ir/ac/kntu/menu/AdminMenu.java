@@ -25,7 +25,7 @@ public class AdminMenu implements Menu{
         String input = ScannerWrapper.getInstance().next();
         switch (input) {
             case "Tournaments" :
-                return TournamentMenu.getInstance();
+                return TournamentMenuAdmin.getInstance();
             case "Classes" :
                 return ClassMenuAdmin.getInstance();
             case "Question_bank" :

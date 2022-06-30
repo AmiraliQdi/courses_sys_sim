@@ -8,11 +8,11 @@ import ir.ac.kntu.util.ScannerWrapper;
 
 import java.util.ArrayList;
 
-public class EditingPractice implements Menu{
+public class TournamentMainPracticeEdit implements Menu{
 
-    private static EditingPractice instance = new EditingPractice();
+    private static TournamentMainPracticeEdit instance = new TournamentMainPracticeEdit();
 
-    public static EditingPractice getInstance() {
+    public static TournamentMainPracticeEdit getInstance() {
         return instance;
     }
 
@@ -22,7 +22,6 @@ public class EditingPractice implements Menu{
         System.out.println();
         OPTIONS.add("Add question");
         OPTIONS.add("See questions");
-        OPTIONS.add("Practice settings");
         OPTIONS.add("See last answers");
         OPTIONS.add("Marks");
         OPTIONS.add("Back");
@@ -36,27 +35,24 @@ public class EditingPractice implements Menu{
         switch (input){
             case "See_last_answers" :
                 return seeLastAnswers();
-            case "Practice_settings" :
-                Main.getCustomer().setLastMenu(EditingPractice.getInstance());
-                return PracticeSetting.getInstance();
             case "Marks" :
                 printMarks();
             case "Back":
-                return ManegingClass.getInstance();
+                return ManagingTournament.getInstance();
             case "Add_question":
-                Main.getCustomer().setLastMenu(EditingPractice.getInstance());
-                return AddQuestionMenu.getInstance();
+                Main.getAdmin().setLastMenu(TournamentMainPracticeEdit.getInstance());
+                return AddQuestionAdminMenu.getInstance();
             case "See_questions":
                 printQuestions();
                 Question targetQuestion = chooseQuestion();
                 if (targetQuestion == null){
-                    return EditingPractice.getInstance();
+                    return TournamentMainPracticeEdit.getInstance();
                 } else {
                     return questionEditing(targetQuestion);
                 }
             default:
                 System.out.println("Wrong input");
-                return EditingPractice.getInstance();
+                return TournamentMainPracticeEdit.getInstance();
         }
     }
 
@@ -64,26 +60,26 @@ public class EditingPractice implements Menu{
         printQuestions();
         Question targetQuestion = chooseQuestion();
         if (targetQuestion == null) {
-            return EditingPractice.getInstance();
+            return TournamentMainPracticeEdit.getInstance();
         }
         System.out.println("Choose which user");
-        for (User user : Main.getCustomer().getManagingClass().getRegisteredUsers()) {
+        for (User user : Main.getAdmin().getManagingTournament().getRegisteredUsers()) {
             System.out.println(user.getName());
         }
         User targetUser = UsersStorage.findByName(ScannerWrapper.getInstance().next());
         ArrayList<Question> targetArrayList = null;
-        targetArrayList = Main.getCustomer().getCurrentPractice().getWorkMap().get(targetUser);
+        targetArrayList = Main.getAdmin().getCurrentPractice().getWorkMap().get(targetUser);
         for (Question question : targetArrayList) {
             if (question.equals(targetQuestion)) {
                 System.out.println(question.getWorkSpace().getLastAnswer());
                 System.out.println("Enter score : ");
                 question.getWorkSpace().getLastAnswer().setScore(ScannerWrapper.getInstance().nextDouble());
                 System.out.println("score setted to : " + question.getWorkSpace().getScore());
-                return EditingPractice.getInstance();
+                return TournamentMainPracticeEdit.getInstance();
             }
         }
         System.out.println("Wrong input!");
-        return EditingPractice.getInstance();
+        return TournamentMainPracticeEdit.getInstance();
     }
 
     private Menu questionEditing(Question targetQuestion){
@@ -93,22 +89,22 @@ public class EditingPractice implements Menu{
         String input = ScannerWrapper.getInstance().next();
         switch (input) {
             case "Back":
-                return EditingPractice.getInstance();
+                return TournamentMainPracticeEdit.getInstance();
             case "Edit_description":
                 editDescription(targetQuestion, input);
-                return EditingPractice.getInstance();
+                return TournamentMainPracticeEdit.getInstance();
             case "Add_answer":
                 addAnswer(targetQuestion, input);
-                return EditingPractice.getInstance();
+                return TournamentMainPracticeEdit.getInstance();
             case "Delete":
                 delete(targetQuestion);
-                return PracticeSetting.getInstance();
+                return TournamentMainPracticeEdit.getInstance();
             case "Set_multiplier" :
                 setMultiplier(targetQuestion);
-                return PracticeSetting.getInstance();
+                return TournamentMainPracticeEdit.getInstance();
             default:
                 System.out.println("Wrong input");
-                return EditingPractice.getInstance();
+                return TournamentMainPracticeEdit.getInstance();
         }
     }
 
@@ -119,17 +115,17 @@ public class EditingPractice implements Menu{
     }
 
     private void delete(Question targetQuestion){
-        ArrayList<Question> result = Main.getCustomer().getCurrentPractice().getQuestions();
+        ArrayList<Question> result = Main.getAdmin().getCurrentPractice().getQuestions();
         result.remove(targetQuestion);
-        Main.getCustomer().getCurrentPractice().setQuestions(result);
-        Main.getCustomer().getCurrentPractice().makeWorkMap(Main.getCustomer().getManagingClass());
+        Main.getAdmin().getCurrentPractice().setQuestions(result);
+        Main.getAdmin().getCurrentPractice().makeWorkMap(Main.getAdmin().getManagingTournament());
     }
 
     private void addAnswer(Question targetQuestion,String input){
         System.out.println("Enter answer");
         input = ScannerWrapper.getInstance().next();
         targetQuestion.setAnswer(input);
-        Main.getCustomer().getCurrentPractice().makeWorkMap(Main.getCustomer().getManagingClass());
+        Main.getAdmin().getCurrentPractice().makeWorkMap(Main.getAdmin().getManagingTournament());
     }
 
     private void editDescription(Question targetQuestion,String input){
@@ -137,14 +133,14 @@ public class EditingPractice implements Menu{
         input = ScannerWrapper.getInstance().next();
         targetQuestion.setDescription(input);
         System.out.println("updated!");
-        Main.getCustomer().getCurrentPractice().makeWorkMap(Main.getCustomer().getManagingClass());
+        Main.getAdmin().getCurrentPractice().makeWorkMap(Main.getAdmin().getManagingTournament());
     }
 
     public static void printMarks(){
-        Main.getCustomer().getCurrentPractice().makeMarks();
-        for (User user : Main.getCustomer().getCurrentPractice().getUserMarks().keySet()){
-            System.out.println(user.getName() + " | " + Main.getCustomer().getCurrentPractice().getUserMarks().get(user) + " | " +
-                    Main.getCustomer().getCurrentPractice().getSumMarks().get(user));
+        Main.getAdmin().getCurrentPractice().makeMarks();
+        for (User user : Main.getAdmin().getCurrentPractice().getUserMarks().keySet()){
+            System.out.println(user.getName() + " | " + Main.getAdmin().getCurrentPractice().getUserMarks().get(user) + " | " +
+                    Main.getAdmin().getCurrentPractice().getSumMarks().get(user));
         }
     }
 
@@ -161,10 +157,10 @@ public class EditingPractice implements Menu{
     }
 
     private void printQuestions(){
-        if (Main.getCustomer().getCurrentPractice().getQuestions().size() == 0){
+        if (Main.getAdmin().getCurrentPractice().getQuestions().size() == 0){
             System.out.println("This practice does not have any question");
         }
-        for (Question question : Main.getCustomer().getCurrentPractice().getQuestions()){
+        for (Question question : Main.getAdmin().getCurrentPractice().getQuestions()){
             question.smallPrint("Teacher");
         }
     }
@@ -172,7 +168,7 @@ public class EditingPractice implements Menu{
     private Question chooseQuestion(){
         System.out.println("Choose question : ");
         String input = ScannerWrapper.getInstance().next();
-        for (Question question : Main.getCustomer().getCurrentPractice().getQuestions()){
+        for (Question question : Main.getAdmin().getCurrentPractice().getQuestions()){
             if (question.getName().equals(input)){
                 return question;
             }

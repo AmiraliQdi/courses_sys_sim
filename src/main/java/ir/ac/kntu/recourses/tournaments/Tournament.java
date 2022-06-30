@@ -4,13 +4,17 @@ import ir.ac.kntu.recourses.Class;
 import ir.ac.kntu.recourses.Practice;
 import ir.ac.kntu.recourses.PracticeStatus;
 import ir.ac.kntu.recourses.User;
+import ir.ac.kntu.recourses.userTypes.Customer;
 import ir.ac.kntu.storage.TournamentStorage;
+import ir.ac.kntu.storage.UsersStorage;
 import ir.ac.kntu.util.Date;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public abstract class Tournament extends Class {
+
+    private ArrayList<Customer> visibleForUsers;
 
     private int maxCustomers;
 
@@ -34,6 +38,10 @@ public abstract class Tournament extends Class {
         this.startingDate = startingDate;
         this.endingDate = endingDate;
         makeMainPractice();
+        visibleForUsers = new ArrayList<>();
+        if (tournamentType.equals(TournamentType.NORMAL)){
+            visibleForUsers.addAll(UsersStorage.getCustomers());
+        }
     }
 
     private void makeMainPractice(){
@@ -61,7 +69,7 @@ public abstract class Tournament extends Class {
                         (oldV,newV) -> oldV, LinkedHashMap::new));
         topUsers = new ArrayList<>(sortedSumMarks.keySet());
         addScores();
-        TournamentStorage.removeTournament(this.getName());
+        TournamentStorage.removeTournament(this);
     }
 
     public ArrayList<User> getTopUsers() {
@@ -83,4 +91,60 @@ public abstract class Tournament extends Class {
         System.out.println(getName() + " | " + tournamentType + " | " + "Owner : " + getTeacherName());
     }
 
+    public Date getStartingDate() {
+        return startingDate;
+    }
+
+    public Date getEndingDate() {
+        return endingDate;
+    }
+
+    public void setStartingDate(Date startingDate) {
+        this.startingDate = startingDate;
+    }
+
+    public void setEndingDate(Date endingDate) {
+        this.endingDate = endingDate;
+    }
+
+    public void setTournamentTime(int tournamentTime) {
+        this.tournamentTime = tournamentTime;
+    }
+
+    public int getTournamentTime() {
+        return tournamentTime;
+    }
+
+    public void setTournamentType(String newType) {
+        switch (newType) {
+            case "SPECIAL" :
+                tournamentType = TournamentType.SPECIAL;
+            case "NORMAL" :
+                tournamentType = TournamentType.NORMAL;
+            case "PRIVATE" :
+                tournamentType = TournamentType.PRIVATE;
+            default:
+                System.out.println("Wrong type!");
+        }
+    }
+
+    public Practice getMainPractice() {
+        return mainPractice;
+    }
+
+    public void setMainPractice(Practice mainPractice) {
+        this.mainPractice = mainPractice;
+    }
+
+    public void addToVisible(Customer user){
+        visibleForUsers.add(user);
+    }
+
+    public ArrayList<Customer> getVisibleForUsers() {
+        return visibleForUsers;
+    }
+
+    public void smallPrintTournament(){
+        System.out.println(getName() + "-" + tournamentType + "-" + startingDate + "/" + endingDate);
+    }
 }

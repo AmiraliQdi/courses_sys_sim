@@ -8,21 +8,21 @@ import ir.ac.kntu.util.ScannerWrapper;
 
 import java.util.ArrayList;
 
-public class TournamentMenu implements Menu{
+public class TournamentMenuAdmin implements Menu{
 
-    private static final TournamentMenu instance = new TournamentMenu();
+    private static final TournamentMenuAdmin instance = new TournamentMenuAdmin();
 
-    private TournamentMenu(){
+    private TournamentMenuAdmin(){
 
     }
 
-    public static TournamentMenu getInstance() {
+    public static TournamentMenuAdmin getInstance() {
         return instance;
     }
 
     @Override
     public void printMenu() {
-        OPTIONS.add("Owned tournaments");
+        OPTIONS.add("See all tournaments");
         OPTIONS.add("Create new tournament");
         OPTIONS.add("Back");
     }
@@ -31,9 +31,9 @@ public class TournamentMenu implements Menu{
     public Menu handleMenu() {
         String input = ScannerWrapper.getInstance().next();
         switch (input) {
-            case "Owned_tournaments" :
+            case "See_all_tournaments" :
                 System.out.println();
-                ArrayList<Tournament> list = TournamentStorage.findByOwner(Main.getAdmin().getUserName());
+                ArrayList<Tournament> list = TournamentStorage.getTournaments();
                 if (list.isEmpty()){
                     System.out.println("Empty!");
                 } else {
@@ -49,7 +49,7 @@ public class TournamentMenu implements Menu{
                     return ManagingTournament.getInstance();
                 } else {
                     System.out.println("Found no tournament with that name!");
-                    return TournamentMenu.getInstance();
+                    return TournamentMenuAdmin.getInstance();
                 }
             case "Create_new_tournament" :
                 Tournament newTournament = makeNewTournament();
@@ -60,7 +60,7 @@ public class TournamentMenu implements Menu{
                 return AdminMenu.getInstance();
             default:
                 System.out.println("Wrong input!");
-                return TournamentMenu.getInstance();
+                return TournamentMenuAdmin.getInstance();
         }
     }
 

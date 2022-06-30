@@ -59,7 +59,7 @@ public class Main {
     }
 
     public static void addStartingInfo(){
-        User user1 = new Customer("amirali","amirali","amirali.ghaedi","123","0025319064","09303811221");
+        User user1 = new Admin("amirali","amirali","amirali.ghaedi","123","0025319064","09303811221");
         User user2 = new Customer("ahmad","ahmad","ahmad.rezai","123","0025319064","09303811221");
         User user3 = new Customer("reza","reza","reza.sediqi","123","0025319064","09303811221");
         User user4 = new Customer("sara","sara","sara.nasiri","123","0025319064","09303811221");

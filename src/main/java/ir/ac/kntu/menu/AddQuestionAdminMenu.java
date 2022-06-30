@@ -8,15 +8,14 @@ import ir.ac.kntu.storage.QuestionBank;
 import ir.ac.kntu.util.Date;
 import ir.ac.kntu.util.ScannerWrapper;
 
-public class AddQuestionMenu implements Menu {
+public class AddQuestionAdminMenu implements Menu{
+    private static AddQuestionAdminMenu instance = new AddQuestionAdminMenu();
 
-    private static AddQuestionMenu instance = new AddQuestionMenu();
-
-    public static AddQuestionMenu getInstance() {
+    public static AddQuestionAdminMenu getInstance() {
         return instance;
     }
 
-    private AddQuestionMenu() {
+    private AddQuestionAdminMenu() {
 
 
     }
@@ -35,28 +34,28 @@ public class AddQuestionMenu implements Menu {
         switch (input) {
             case "Make_new_question":
                 Question question = makeNewQuestion();
-                Main.getCustomer().getCurrentPractice().addNewQuestion(question);
-                return AddQuestionMenu.getInstance();
+                Main.getAdmin().getCurrentPractice().addNewQuestion(question);
+                return AddQuestionAdminMenu.getInstance();
             case "Add_from_bank":
                 System.out.println("Enter question name : ");
                 input = ScannerWrapper.getInstance().next();
                 Question search = QuestionBank.findQuestionByName(input);
                 Question copy = new Question(search);
                 copy.setDateOfUpload(Date.CURRENT_DATE);
-                Main.getCustomer().getCurrentPractice().addNewQuestion(copy);
+                Main.getAdmin().getCurrentPractice().addNewQuestion(copy);
                 System.out.println("Question + " + copy.getName() + " added!");
                 if (QuestionBank.findQuestionByName(input) == null) {
                     System.out.println("Wrong name");
-                    return AddQuestionMenu.getInstance();
+                    return AddQuestionAdminMenu.getInstance();
                 }
                 break;
             case "Back":
-                return EditingPractice.getInstance();
+                return TournamentMainPracticeEdit.getInstance();
             default:
                 System.out.println("Wrong input");
-                return AddQuestionMenu.getInstance();
+                return AddQuestionAdminMenu.getInstance();
         }
-        return AddQuestionMenu.getInstance();
+        return AddQuestionAdminMenu.getInstance();
     }
 
     private Question makeNewQuestion() {
